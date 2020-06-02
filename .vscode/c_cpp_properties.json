@@ -3,8 +3,8 @@
         {
             "name": "Mac",
             "includePath": [
-                "${workspaceFolder}/**",
-                "/opt/devkitpro/libnds/include/**"
+                "${workspaceFolder}/**",   
+                "/opt/devkitpro/libnds/include/**"          
             ],
             "defines": [],
             "macFrameworkPath": [],

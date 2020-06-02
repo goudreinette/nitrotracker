@@ -22,6 +22,11 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+// these prevent red squiggles in vscode ----
+#define NDS 
+#define ARM9
+//------
+
 //#define DEBUG
 //#define GURU // Show guru meditations
 #define SPLASH
