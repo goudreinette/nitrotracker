@@ -1,3 +1,5 @@
 /.DS_Store
 /nitrotracker-master-3.gba.nds
 /nitrotracker-master-3.nds
+
+build/**
