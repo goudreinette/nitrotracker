@@ -13,7 +13,7 @@ export TOPDIR	:=	$(CURDIR)
 NITRO_FILES	:=
 
 # These set the information text in the nds file
-GAME_TITLE     := My Wonderful Homebrew
+GAME_TITLE     := NitroTracker
 GAME_SUBTITLE1 := built with devkitARM
 GAME_SUBTITLE2 := http://devitpro.org
 
