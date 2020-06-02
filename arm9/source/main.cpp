@@ -689,24 +689,24 @@ void handleLoad(void)
 
 		Song *newsong;
 		u16 err;
-		// err = xm_transport.load(file->name_with_path.c_str(), &newsong);
+		err = xm_transport.load(file->name_with_path.c_str(), &newsong);
 
 		deleteMessageBox();
 
-		// if(err) {
-		// 	// Emergency: set up an empty song
-		// 	newsong = new Song(10, 125);
-		// }
+		if(err) {
+			// Emergency: set up an empty song
+			newsong = new Song(10, 125);
+		}
 
 		setSong(newsong);
 
 		DC_FlushAll();
 
-		// if(err)
-		// {
-		// 	showMessage(xm_transport.getError(err));
-		// 	PrintFreeMem();
-		// }
+		if(err)
+		{
+			showMessage(xm_transport.getError(err));
+			PrintFreeMem();
+		}
 
 	}
 	else if(strcmp(ext, "wav")==0)
@@ -744,7 +744,7 @@ void saveFile(void)
 	if(rbsong->getActive() == true) // Save the song
 	{
 		if(song != 0) {
-			// err = xm_transport.save(pathfilename, song);
+			err = xm_transport.save(pathfilename, song);
 		}
 	}
 	else if(rbsample->getActive() == true) // Save the sample
@@ -3173,8 +3173,8 @@ void VblankHandler(void)
 	touchRead(&touch);
 
 	// Bugfix for the lack of .px/.py
-	long x = touch.rawx / 16;
-	long y = touch.rawy / 16;
+	long x = ((touch.rawx - 192) / 14.44);
+	long y = ((touch.rawy - 224) / 18.83);
 
 	if (keysdown & KEY_TOUCH)
 	{
