@@ -22,12 +22,12 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#define DEBUG
-#define GURU // Show guru meditations
-//#define SPLASH
+//#define DEBUG
+//#define GURU // Show guru meditations
+#define SPLASH
 //#define WIFIDEBUG
-#define WIFI
-// #define USE_FAT
+// #define WIFI
+#define USE_FAT
 
 #include <nds.h>
 #include <nds/arm9/console.h>
@@ -116,7 +116,6 @@
 #define FILETYPE_SAMPLE	1
 #define FILETYPE_INST	2
 
-touchPosition touch;
 u8 frame = 0;
 
 u8 active_buffer = FRONT_BUFFER;
@@ -3163,31 +3162,42 @@ void handleButtons(u16 buttons, u16 buttonsheld)
 
 void VblankHandler(void)
 {
+	touchPosition touch;
+
 	// Check input
 	scanKeys();
 	u16 keysdown = keysDown();
 	u16 keysup = keysUp();
 	u16 keysheld = keysHeld();
+
 	touchRead(&touch);
 
-	if(keysdown & KEY_TOUCH)
+	// Bugfix for the lack of .px/.py
+	long x = touch.rawx / 16;
+	long y = touch.rawy / 16;
+
+	if (keysdown & KEY_TOUCH)
 	{
-		gui->penDown(touch.px, touch.py);
+		#ifdef DEBUG
+			iprintf("%i, %i \n", x, y);
+		#endif
+
+		gui->penDown(x, y);
 		drawMainScreen();
 	}
 
 	if(keysup & KEY_TOUCH)
 	{
-		gui->penUp(touch.px, touch.py);
+		gui->penUp(x, y);
 		lastx = -255;
 		lasty = -255;
 	}
 
-	if( (keysheld & KEY_TOUCH) && ( (abs(touch.px - lastx)>0) || (abs(touch.py - lasty)>0) ) ) // PenMove
+	if( (keysheld & KEY_TOUCH) && ( (abs(x - lastx)>0) || (abs(y - lasty)>0) ) ) // PenMove
 	{
-		gui->penMove(touch.px, touch.py);
-		lastx = touch.px;
-		lasty = touch.py;
+		gui->penMove(x, y);
+		lastx = x;
+		lasty = y;
 		if(gui->getActiveScreen() == MAIN_SCREEN)
 			drawMainScreen();
 	}
