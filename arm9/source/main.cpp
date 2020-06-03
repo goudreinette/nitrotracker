@@ -2894,9 +2894,9 @@ void setupGUI(void)
 	lbsamples = new ListBox(141, 101, 114, 23, &sub_vram, MAX_INSTRUMENT_SAMPLES, true, false, true);
 
 	buttonswitchsub    = new BitButton(233, 1  , 21, 21, &sub_vram, icon_flp_raw, 18, 18);
-	buttonplay         = new BitButton(180, 4  , 23, 15, &sub_vram, icon_play_raw, 12, 12, 5, 0, true);
-	buttonpause        = new BitButton(180, 4  , 23, 15, &sub_vram, icon_pause_raw, 12, 12, 5, 0, false);
-	buttonstop         = new BitButton(204, 4  , 23, 15, &sub_vram, icon_stop_raw, 12, 12, 5, 0);
+	buttonplay         = new BitButton(207, 4  , 23, 15, &sub_vram, icon_play_raw, 12, 12, 5, 0, true);
+	buttonpause        = new BitButton(207, 4  , 23, 15, &sub_vram, icon_pause_raw, 12, 12, 5, 0, false);
+	buttonstop         = new BitButton(232, 4  , 23, 15, &sub_vram, icon_stop_raw, 12, 12, 5, 0);
 
 	buttoninsnote2     = new Button(225, 140, 30, 12, &sub_vram);
 	buttondelnote2     = new Button(225, 153, 30, 12, &sub_vram);
