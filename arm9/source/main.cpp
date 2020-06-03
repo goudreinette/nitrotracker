@@ -32,7 +32,7 @@
 #define SPLASH
 //#define WIFIDEBUG
 // #define WIFI
-// #define USE_FAT
+#define USE_FAT
 
 #include <nds.h>
 #include <nds/arm9/console.h>
@@ -1055,9 +1055,10 @@ void stop(void)
 
 void stopPlay(void)
 {
-	stop();
-
 	state->pause = false;
+	state->row = 0;
+
+	stop();
 
 	buttonpause->hide();
 	buttonplay->show();
