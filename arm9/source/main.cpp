@@ -2916,9 +2916,9 @@ void setupGUI(void)
 	tbrecord->setCaption("record!");
 	tbrecord->registerToggleCallback(setRecordMode);
 
-	labeladd = new Label(182, 126, 22, 12, &sub_vram, false, true);
+	labeladd = new Label(182, 126, 22, 12, &sub_vram, false, true, true);
 	labeladd->setCaption("add");
-	labeloct = new Label(206, 126, 25, 12, &sub_vram, false, true);
+	labeloct = new Label(206, 126, 25, 12, &sub_vram, false, true, true);
 	labeloct->setCaption("oct");
 	numberboxadd    = new NumberBox(185, 135, 18, 17, &sub_vram, state->add, 0, 8, 1);
 	numberboxoctave = new NumberBox(206, 135, 18, 17, &sub_vram, state->basenote/12, 0, 6, 1);
