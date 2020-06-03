@@ -4,7 +4,7 @@
 
 ProTheme::ProTheme(/* args */)
 {
-    col_bg                  = RGB15(7,9,12)|BIT(15);
+    col_bg                  = RGB15(7,9,13)|BIT(15);
 	col_dark_bg             = col_bg;
 	col_medium_bg           = RGB15(16,16,16)|BIT(15);
 	col_light_bg            = RGB15(22,22,22)|BIT(15);

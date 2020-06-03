@@ -29,7 +29,7 @@
 
 //#define DEBUG
 //#define GURU // Show guru meditations
-//#define SPLASH
+#define SPLASH
 //#define WIFIDEBUG
 // #define WIFI
 // #define USE_FAT
@@ -3011,7 +3011,7 @@ void setupGUI(void)
 
 		gui->registerWidget(labelmute, 0, MAIN_SCREEN);
 		gui->registerWidget(buttonunmuteall, 0, MAIN_SCREEN);
-		gui->registerWidget(buttonswitchmain, 0, MAIN_SCREEN);
+		// gui->registerWidget(buttonswitchmain, 0, MAIN_SCREEN);
 		gui->registerWidget(labelnotevol, 0, MAIN_SCREEN);
 		gui->registerWidget(nsnotevolume, 0, MAIN_SCREEN);
 		gui->registerWidget(buttonsetnotevol, 0, MAIN_SCREEN);
@@ -3026,7 +3026,7 @@ void setupGUI(void)
 		gui->registerWidget(pv, 0, MAIN_SCREEN);
 	// </Main Screen>
 
-	gui->registerWidget(buttonswitchsub, 0, SUB_SCREEN);
+	// gui->registerWidget(buttonswitchsub, 0, SUB_SCREEN);
 	gui->registerWidget(buttonplay, 0, SUB_SCREEN);
 	gui->registerWidget(buttonstop, 0, SUB_SCREEN);
 	gui->registerWidget(buttonpause, 0, SUB_SCREEN);
