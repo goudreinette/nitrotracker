@@ -30,13 +30,15 @@
 #include <sys/dir.h>
 
 #include "tools.h"
+#include "protheme.h"
+
 
 /* ===================== PUBLIC ===================== */
 
 Settings::Settings(bool use_fat)
 : handedness(RIGHT_HANDED),
 sample_preview(true),
-theme(new Theme()),
+theme(new ProTheme()),
 fat(use_fat)
 {
 	memset(songpath, 0, 255);

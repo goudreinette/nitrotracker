@@ -29,10 +29,10 @@
 
 //#define DEBUG
 //#define GURU // Show guru meditations
-#define SPLASH
+//#define SPLASH
 //#define WIFIDEBUG
 // #define WIFI
-#define USE_FAT
+// #define USE_FAT
 
 #include <nds.h>
 #include <nds/arm9/console.h>
