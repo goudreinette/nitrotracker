@@ -29,7 +29,7 @@
 
 //#define DEBUG
 //#define GURU // Show guru meditations
-#define SPLASH
+ #define SPLASH
 //#define WIFIDEBUG
 // #define WIFI
 #define USE_FAT
@@ -2956,13 +2956,13 @@ void setupGUI(void)
 		buttonswitchmain = new BitButton(233, 1  , 21, 21, &main_vram_back, icon_flp_raw, 18, 18);
 		buttonswitchmain->registerPushCallback(switchScreens);
 
-		labelmute = new Label(226, 23, 32, 8, &main_vram_back, false, true);
+		labelmute = new Label(226, 23, 32, 8, &main_vram_back, false, false, true);
 		labelmute->setCaption("mute");
 
 		buttonunmuteall = new Button(225, 32, 30, 12, &main_vram_back);
 		buttonunmuteall->setCaption("none");
 
-		labelnotevol = new Label(230, 44, 23, 10, &main_vram_back, false, true);
+		labelnotevol = new Label(230, 44, 23, 10, &main_vram_back, false, false, true);
 		labelnotevol->setCaption("vol");
 
 		nsnotevolume	 = new NumberSlider(225, 54, 30, 17, &main_vram_back, 127, 0, 127, true);

@@ -8,3 +8,5 @@
 *.a
 
 .svn/
+
+tobkit/build/**.**
