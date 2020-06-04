@@ -27,13 +27,13 @@
 #define ARM9
 //------
 
-#define DEBUG
-#define DESMUME
+//#define DEBUG
+//#define DESMUME
 //#define GURU // Show guru meditations
-//  #define SPLASH
+#define SPLASH
 //#define WIFIDEBUG
-// #define WIFI
-//#define USE_FAT
+//#define WIFI
+#define USE_FAT
 
 #include <nds.h>
 #include <nds/arm9/console.h>
@@ -316,6 +316,17 @@ void updateKeyLabels(void)
 	}
 }
 
+
+void moveStepDown() {
+	// Check if we are not at the bottom and only scroll down as far as possible
+	if((state->playing == false)||(state->pause==true))
+	{
+		state->row += state->add;
+		state->row %= song->getPatternLength(song->getPotEntry(state->potpos));
+	}
+}
+
+
 void handleNoteStroke(u8 note)
 {
 	// If we are recording
@@ -326,6 +337,7 @@ void handleNoteStroke(u8 note)
 			// Because then we don't use the offset since they have fixed indices
 			
 			// If there is a selection, clear the whole selection!!
+			// And don't step down if it is.
 			u16 sel_x1, sel_y1, sel_x2, sel_y2;
 			if(pv->getSelection(&sel_x1, &sel_y1, &sel_x2, &sel_y2) == true)
 			{
@@ -340,19 +352,16 @@ void handleNoteStroke(u8 note)
 				song->clearCell(&(song->getPattern(song->getPotEntry(state->potpos))[state->channel][state->row]));
 				if(note==STOP_NOTE)
 					song->getPattern(song->getPotEntry(state->potpos))[state->channel][state->row].note = note;
-			
+				moveStepDown();
 			}
+		// Normal note
 		} else {
 			song->getPattern(song->getPotEntry(state->potpos))[state->channel][state->row].note = state->basenote + note;
 			song->getPattern(song->getPotEntry(state->potpos))[state->channel][state->row].instrument = state->instrument;
+			moveStepDown();
 		}
 
-		// Check if we are not at the bottom and only scroll down as far as possible
-		if((state->playing == false)||(state->pause==true))
-		{
-			state->row += state->add;
-			state->row %= song->getPatternLength(song->getPotEntry(state->potpos));
-		}
+		
 
 		// Redraw
 		drawMainScreen();
