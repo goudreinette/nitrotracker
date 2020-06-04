@@ -61,7 +61,7 @@ void Piano::penMove(u8 px, u8 py)
 	
 	u8 note = piano_hit[kby][kbx];
 	
-	// Only when it moves to another note
+	// Only do something when you move to another note
 	if (note != curr_note) {
 		resetPals();
 		if(onRelease) {
@@ -75,8 +75,6 @@ void Piano::penMove(u8 px, u8 py)
 		}
 		
 		curr_note = note;
-
-		// draw();
 	}
 }
 
