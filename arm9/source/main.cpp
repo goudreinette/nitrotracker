@@ -28,7 +28,7 @@
 //------
 
 //#define DEBUG
-//#define DESMUME
+#define DESMUME
 //#define GURU // Show guru meditations
 #define SPLASH
 //#define WIFIDEBUG
