@@ -32,8 +32,8 @@
 
 /*
  * This is the beginning of a mod importer.
- * 
-#include "mod_transport.h"
+ */ 
+#include "ntxm/mod_transport.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -220,4 +220,3 @@ const char *ModTransport::getError(u16 error_id)
 {
 	return modtransporterrors[error_id-1];
 }
-*/

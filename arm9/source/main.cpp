@@ -230,7 +230,9 @@ int lastx, lasty;
 Song *song;
 State *state;
 Settings *settings;
+
 XMTransport xm_transport;
+MODTra xm_transport;
 
 Cell **clipboard = 0;
 u16 clipboard_width = 0, clipboard_height = 0;
