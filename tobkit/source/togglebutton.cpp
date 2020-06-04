@@ -97,13 +97,13 @@ void ToggleButton::draw(void)
 	u16 col;
 	if(penIsDown) {
 		if(on) {
-			col = theme->col_dark_ctrl;
+			col = theme->col_signal;
 		} else {
 			col = theme->col_light_ctrl;
 		}
 	} else {
 		if(on) {
-			col = theme->col_light_ctrl;
+			col = theme->col_signal;
 		} else {
 			col = theme->col_text;
 		}
