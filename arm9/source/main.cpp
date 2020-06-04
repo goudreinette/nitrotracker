@@ -1013,7 +1013,7 @@ void redrawSubScreen(void)
 {
 	// Fill screen
 	for(u16 i=0;i<256*153;++i) {
-		sub_vram[i] = RGB15(4,6,15)|BIT(15);
+		sub_vram[i] = settings->getTheme()->col_bg;
 	}
 
 	// Redraw GUI
