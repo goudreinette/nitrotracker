@@ -27,12 +27,13 @@
 #define ARM9
 //------
 
-//#define DEBUG
+#define DEBUG
+#define DESMUME
 //#define GURU // Show guru meditations
- #define SPLASH
+//  #define SPLASH
 //#define WIFIDEBUG
 // #define WIFI
-#define USE_FAT
+//#define USE_FAT
 
 #include <nds.h>
 #include <nds/arm9/console.h>
@@ -323,9 +324,24 @@ void handleNoteStroke(u8 note)
 		// Check if this was an empty- or stopnote
 		if((note==EMPTY_NOTE)||(note==STOP_NOTE)) {
 			// Because then we don't use the offset since they have fixed indices
-			song->clearCell(&(song->getPattern(song->getPotEntry(state->potpos))[state->channel][state->row]));
-			if(note==STOP_NOTE)
-				song->getPattern(song->getPotEntry(state->potpos))[state->channel][state->row].note = note;
+			
+			// If there is a selection, clear the whole selection!!
+			u16 sel_x1, sel_y1, sel_x2, sel_y2;
+			if(pv->getSelection(&sel_x1, &sel_y1, &sel_x2, &sel_y2) == true)
+			{
+				Cell **ptn = song->getPattern(song->getPotEntry(state->potpos));
+				for(u16 col=sel_x1; col<=sel_x2; ++col) {
+					for(u16 row=sel_y1; row<=sel_y2; ++row) {
+						song->clearCell(&(song->getPattern(song->getPotEntry(state->potpos))[col][row]));
+					}
+				}
+			// Else just clear/fill one of them
+			} else {
+				song->clearCell(&(song->getPattern(song->getPotEntry(state->potpos))[state->channel][state->row]));
+				if(note==STOP_NOTE)
+					song->getPattern(song->getPotEntry(state->potpos))[state->channel][state->row].note = note;
+			
+			}
 		} else {
 			song->getPattern(song->getPotEntry(state->potpos))[state->channel][state->row].note = state->basenote + note;
 			song->getPattern(song->getPotEntry(state->potpos))[state->channel][state->row].instrument = state->instrument;
@@ -3178,14 +3194,21 @@ void VblankHandler(void)
 
 	touchRead(&touch);
 
-	// Bugfix for the lack of .px/.py
+	// Bugfix for the lack of .px/.py.
+	// Somehow DesMUME uses different coordinates :(
+	#ifdef DESMUME
+	long x = ((touch.rawx - 16) / 15.81);
+	long y = ((touch.rawy - 16) / 15.83);	
+	#else
 	long x = ((touch.rawx - 192) / 14.44);
 	long y = ((touch.rawy - 224) / 18.83);
+	#endif
+
 
 	if (keysdown & KEY_TOUCH)
 	{
 		#ifdef DEBUG
-			iprintf("%i, %i \n", x, y);
+			iprintf("%i, %i \n", touch.rawx, touch.rawy);
 		#endif
 
 		gui->penDown(x, y);
