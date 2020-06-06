@@ -276,7 +276,7 @@ void PatternView::draw(void)
 	
 	s16 realrow;
 	u16 ptnlen = song->getPatternLength(song->getPotEntry(state->potpos));
-	for(u16 i=0; i<=getNumVisibleRows(); ++i) {
+	for(u16 i=0; i<=getNumVisibleRows()-1; ++i) {
 		realrow = i-getCursorBarPos()+state->row;
 	
 		if((realrow>=0)&&(realrow<=ptnlen)) {
