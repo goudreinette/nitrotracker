@@ -280,11 +280,21 @@ void PatternView::draw(void)
 		realrow = i-getCursorBarPos()+state->row;
 	
 		if((realrow>=0)&&(realrow<=ptnlen)) {
+			int effectivewidth = getEffectiveWidth();
+			int nonoccludedmax = 227 - getCellWidth();
+			int fullend = std::fmin(effectivewidth, nonoccludedmax);
+			int remainder = std::fmax(effectivewidth - nonoccludedmax, 0);
+
 			if(realrow%PV_CELL_HEIGHT==0) {
-				drawLine(0, PV_CELL_HEIGHT*i, getEffectiveWidth(), 1, linescol);
+				// MAIN LINES - full brightness
+				drawLine(0, PV_CELL_HEIGHT*i, fullend, 1, linescol);
+				// faded
+				drawLine(fullend, PV_CELL_HEIGHT*i, remainder, 1, col_sublines);
 			} else {
-				drawLine(PV_BORDER_WIDTH, PV_CELL_HEIGHT*i,
-					 getEffectiveWidth()-PV_BORDER_WIDTH, 1, col_sublines);
+				// SUB LINES - full brightness
+				drawLine(PV_BORDER_WIDTH, PV_CELL_HEIGHT*i, fullend-PV_BORDER_WIDTH, 1, col_sublines);
+				// faded
+				drawLine(fullend, PV_CELL_HEIGHT*i, remainder, 1, RGB15(28,28,28)|BIT(15));
 			}
 		}
 	}

@@ -27,6 +27,7 @@
 
 #include "tobkit/widget.h"
 #include "ntxm/song.h"
+#include <math.h>
 
 #include "../state.h"
 #include "font_3x5.h"
@@ -248,14 +249,15 @@ class PatternView: public Widget {
 
 		inline u8 getEffectiveWidth(void)
 		{
-			return PV_BORDER_WIDTH + getNumVisibleChannels() * getCellWidth();
+			// HACK, FIXME: max width to prevent the box from drawing outside the screen (and becoming not-drawn)
+			return std::fmin(PV_BORDER_WIDTH + getNumVisibleChannels() * getCellWidth(), 255);
 		}
 
 		inline u8 getNumVisibleChannels(void)
 		{
-			u8 cw = (width-PV_BORDER_WIDTH) / getCellWidth();
+			u8 cw = (width-PV_BORDER_WIDTH) / getCellWidth() + 1;
 			if(cw < song->getChannels()) {
-				return cw;
+				return cw; // Fill the whole screen! We will fade the two channels below the buttons...
 			} else {
 				return song->getChannels();
 			}
