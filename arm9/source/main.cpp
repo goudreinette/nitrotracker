@@ -121,7 +121,8 @@
 #define FILETYPE_SONG	0
 #define FILETYPE_SAMPLE	1
 #define FILETYPE_INST	2
-#define BUTTON_X 227
+#define BUTTON_X 226
+#define BUTTON_W 29
 
 u8 frame = 0;
 
@@ -2926,10 +2927,10 @@ void setupGUI(void)
 	buttonpause        = new BitButton(207, 4  , 23, 15, &sub_vram, icon_pause_raw, 12, 12, 5, 0, false);
 	buttonstop         = new BitButton(232, 4  , 23, 15, &sub_vram, icon_stop_raw, 12, 12, 5, 0);
 
-	buttoninsnote2     = new Button(227, 140, 28, 12, &sub_vram);
-	buttondelnote2     = new Button(227, 153, 28, 12, &sub_vram);
-	buttonemptynote    = new Button(227, 166, 28, 12, &sub_vram);
-	buttonstopnote     = new Button(227, 179, 28, 12, &sub_vram);
+	buttoninsnote2     = new Button(BUTTON_X, 140, BUTTON_W, 12, &sub_vram);
+	buttondelnote2     = new Button(BUTTON_X, 153, BUTTON_W, 12, &sub_vram);
+	buttonemptynote    = new Button(BUTTON_X, 166, BUTTON_W, 12, &sub_vram);
+	buttonstopnote     = new Button(BUTTON_X, 179, BUTTON_W, 12, &sub_vram);
 	buttonrenamesample = new Button(141, 125 , 23, 12, &sub_vram, false);
 	buttonrenameinst   = new Button(141, 20 , 23, 12, &sub_vram);
 
@@ -2987,16 +2988,16 @@ void setupGUI(void)
 		labelmute = new Label(226, 23, 32, 8, &main_vram_back, false, false, true);
 		labelmute->setCaption("mute");
 
-		buttonunmuteall = new Button(BUTTON_X, 32, 28, 12, &main_vram_back);
+		buttonunmuteall = new Button(BUTTON_X, 32, BUTTON_W, 12, &main_vram_back);
 		buttonunmuteall->setCaption("none");
 
 		labelnotevol = new Label(230, 44, 23, 10, &main_vram_back, false, false, true);
 		labelnotevol->setCaption("vol");
 
-		nsnotevolume	 = new NumberSlider(225, 54, 28, 17, &main_vram_back, 127, 0, 127, true);
+		nsnotevolume	 = new NumberSlider(225, 54, BUTTON_W, 17, &main_vram_back, 127, 0, 127, true);
 		// nsnotevolume->registerChangeCallback(handleNoteVolumeChanged);
 
-		buttonsetnotevol = new Button(225, 70, 28, 12, &main_vram_back);
+		buttonsetnotevol = new Button(225, 70, BUTTON_W, 12, &main_vram_back);
 		buttonsetnotevol->setCaption("set");
 		buttonsetnotevol->registerPushCallback(handleSetNoteVol);
 
@@ -3004,19 +3005,19 @@ void setupGUI(void)
 		//buttoncopy        = new BitButton(232,  74, 22, 21, &main_vram_back, icon_copy_raw, 16, 16, 3, 3);
 		//buttonpaste       = new BitButton(232,  96, 22, 21, &main_vram_back, icon_paste_raw, 16, 16, 3, 3);
 
-		buttoncut         = new Button(230,  86, 28, 12, &main_vram_back);
-		buttoncopy        = new Button(230,  99, 28, 12, &main_vram_back);
-		buttonpaste       = new Button(230, 112, 28, 12, &main_vram_back);
+		buttoncut         = new Button(230,  86, BUTTON_W, 12, &main_vram_back);
+		buttoncopy        = new Button(230,  99, BUTTON_W, 12, &main_vram_back);
+		buttonpaste       = new Button(230, 112, BUTTON_W, 12, &main_vram_back);
 
 		buttoncut->setCaption("cut");
 		buttoncopy->setCaption("cp");
 		buttonpaste->setCaption("pst");
 
-		buttoncolselect   = new Button(230, 125, 28, 12, &main_vram_back);
-		buttoninsnote     = new Button(230, 140, 28, 12, &main_vram_back);
-		buttondelnote     = new Button(230, 153, 28, 12, &main_vram_back);
-		buttonemptynote2  = new Button(230, 166, 28, 12, &main_vram_back);
-		buttonstopnote2   = new Button(230, 179, 28, 12, &main_vram_back);
+		buttoncolselect   = new Button(230, 125, BUTTON_W, 12, &main_vram_back);
+		buttoninsnote     = new Button(230, 140, BUTTON_W, 12, &main_vram_back);
+		buttondelnote     = new Button(230, 153, BUTTON_W, 12, &main_vram_back);
+		buttonemptynote2  = new Button(230, 166, BUTTON_W, 12, &main_vram_back);
+		buttonstopnote2   = new Button(230, 179, BUTTON_W, 12, &main_vram_back);
 
 		buttonunmuteall->registerPushCallback(handleUnmuteAll);
 		buttoncut->registerPushCallback(handleCut);

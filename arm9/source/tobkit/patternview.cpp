@@ -301,16 +301,18 @@ void PatternView::draw(void)
 	
 	// V-Lines
 	for(u16 i=0;i<=getNumVisibleChannels();++i) {
-		// u16 col = i > 6 ? col_sublines : linescol;
-		if (i < 7) {
-			drawLine(PV_BORDER_WIDTH-1+i*getCellWidth(), 0, width-PV_BORDER_WIDTH, 0, linescol);
-		}
+		u16 col = i > 6 ? col_sublines : linescol;
+		// if (i < 7) {
+			drawLine(PV_BORDER_WIDTH-1+i*getCellWidth(), 0, width-PV_BORDER_WIDTH, 0, col);
+		// }
 	}
 	
 	// Cursor bar
-	drawBox(0, PV_CURSORBAR_Y, getEffectiveWidth(), PV_CELL_HEIGHT+1);
-	drawGradient(cb_col1, cb_col2, 1, PV_CURSORBAR_Y+1, getEffectiveWidth()-2, PV_CELL_HEIGHT-1);
-	
+	// drawBox(0, PV_CURSORBAR_Y, getEffectiveWidth(), PV_CELL_HEIGHT+1);
+	drawGradient(cb_col1, cb_col2, 0, PV_CURSORBAR_Y+1, getEffectiveWidth()-1, PV_CELL_HEIGHT-1);
+	drawLine(0, PV_CURSORBAR_Y+PV_CELL_HEIGHT, getEffectiveWidth()-1, 1, linescol);
+	drawLine(0, PV_CURSORBAR_Y, getEffectiveWidth()-1, 1, linescol);
+
 	// Cursor
 	drawBox(PV_BORDER_WIDTH-1+(state->channel-hscrollpos)*getCellWidth(), PV_CURSORBAR_Y, getCellWidth()+1, PV_CELL_HEIGHT+1);
 	drawGradient(cb_col1_highlight, cb_col2_highlight, PV_BORDER_WIDTH+(state->channel-hscrollpos)*getCellWidth(),
