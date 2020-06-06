@@ -287,21 +287,24 @@ void PatternView::draw(void)
 
 			if(realrow%PV_CELL_HEIGHT==0) {
 				// MAIN LINES - full brightness
-				drawLine(0, PV_CELL_HEIGHT*i, fullend, 1, linescol);
+				drawLine(0, PV_CELL_HEIGHT*i, effectivewidth, 1, linescol);
 				// faded
-				drawLine(fullend, PV_CELL_HEIGHT*i, remainder, 1, col_sublines);
+				// drawLine(fullend, PV_CELL_HEIGHT*i, remainder, 1, col_sublines);
 			} else {
 				// SUB LINES - full brightness
-				drawLine(PV_BORDER_WIDTH, PV_CELL_HEIGHT*i, fullend-PV_BORDER_WIDTH, 1, col_sublines);
+				drawLine(PV_BORDER_WIDTH, PV_CELL_HEIGHT*i, effectivewidth-PV_BORDER_WIDTH, 1, col_sublines);
 				// faded
-				drawLine(fullend, PV_CELL_HEIGHT*i, remainder, 1, RGB15(28,28,28)|BIT(15));
+				// drawLine(fullend, PV_CELL_HEIGHT*i, remainder, 1, RGB15(28,28,28)|BIT(15));
 			}
 		}
 	}
 	
 	// V-Lines
 	for(u16 i=0;i<=getNumVisibleChannels();++i) {
-		drawLine(PV_BORDER_WIDTH-1+i*getCellWidth(), 0, width-PV_BORDER_WIDTH, 0, linescol);
+		// u16 col = i > 6 ? col_sublines : linescol;
+		if (i < 7) {
+			drawLine(PV_BORDER_WIDTH-1+i*getCellWidth(), 0, width-PV_BORDER_WIDTH, 0, linescol);
+		}
 	}
 	
 	// Cursor bar

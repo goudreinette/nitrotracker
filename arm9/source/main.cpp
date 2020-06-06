@@ -2987,16 +2987,16 @@ void setupGUI(void)
 		labelmute = new Label(226, 23, 32, 8, &main_vram_back, false, false, true);
 		labelmute->setCaption("mute");
 
-		buttonunmuteall = new Button(BUTTON_X, 32, 30, 12, &main_vram_back);
+		buttonunmuteall = new Button(BUTTON_X, 32, 28, 12, &main_vram_back);
 		buttonunmuteall->setCaption("none");
 
 		labelnotevol = new Label(230, 44, 23, 10, &main_vram_back, false, false, true);
 		labelnotevol->setCaption("vol");
 
-		nsnotevolume	 = new NumberSlider(225, 54, 30, 17, &main_vram_back, 127, 0, 127, true);
+		nsnotevolume	 = new NumberSlider(225, 54, 28, 17, &main_vram_back, 127, 0, 127, true);
 		// nsnotevolume->registerChangeCallback(handleNoteVolumeChanged);
 
-		buttonsetnotevol = new Button(225, 70, 30, 12, &main_vram_back);
+		buttonsetnotevol = new Button(225, 70, 28, 12, &main_vram_back);
 		buttonsetnotevol->setCaption("set");
 		buttonsetnotevol->registerPushCallback(handleSetNoteVol);
 
