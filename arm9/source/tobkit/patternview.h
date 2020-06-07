@@ -187,11 +187,11 @@ class PatternView: public Widget {
 			drawChar(byte%0x10, cx+PV_CHAR_WIDTH, cy, col);
 		}
 
-		inline void drawCell(u8 cellx, u8 celly, u8 px, u8 py, bool dark)
+		inline void drawCell(u8 cellx, u8 celly, u8 px, u8 py, bool highlighted)
 		{
-			u16 notecol = dark?col_notes_dark:col_notes;
-			u16 instrcol = dark?col_instr_dark:col_instr;
-			u16 volumecol = dark?col_volume_dark:col_volume;
+			u16 notecol = highlighted?col_notes_dark:col_notes;
+			u16 instrcol = highlighted?col_instr_dark:col_instr;
+			u16 volumecol = highlighted?col_volume_dark:col_volume;
 			
 			/*
 			typedef struct {
