@@ -27,8 +27,8 @@
 #define ARM9
 //------
 
-//#define DEBUG
-#define DESMUME
+// #define DEBUG
+// #define DESMUME
 //#define GURU // Show guru meditations
 // #define SPLASH
 //#define WIFIDEBUG
@@ -121,8 +121,8 @@
 #define FILETYPE_SONG	0
 #define FILETYPE_SAMPLE	1
 #define FILETYPE_INST	2
-#define BUTTON_X 226
-#define BUTTON_W 29
+#define BUTTON_X 225
+#define BUTTON_W 30
 
 u8 frame = 0;
 
@@ -645,7 +645,7 @@ void setSong(Song *newsong)
 bool loadSample(const char *filename_with_path)
 {
 	const char *filename = strrchr(filename_with_path, '/') + 1;
-	iprintf("file: %s %s\n",filename_with_path, filename);
+	//iprintf("file: %s %s\n",filename_with_path, filename);
 
 	bool load_success;
 	Sample *newsmp = new Sample(filename_with_path, false, &load_success);
@@ -767,7 +767,7 @@ void saveFile(void)
 	strcpy(pathfilename, path);
 	strcpy(pathfilename+strlen(path), filename);
 
-	iprintf("saving %s ...\n", filename);
+	//iprintf("saving %s ...\n", filename);
 
 	mb = new MessageBox(&sub_vram, "one moment", 0);
 	gui->registerOverlayWidget(mb, 0, SUB_SCREEN);
@@ -788,7 +788,7 @@ void saveFile(void)
 
 	deleteMessageBox();
 
-	iprintf("done\n");
+	//iprintf("done\n");
 
 	free(pathfilename);
 
@@ -895,7 +895,7 @@ void handleTypewriterFilenameOk(void)
 
 	char *text = tw->getText();
 	char *name = 0;
-	iprintf("%s\n", text);
+	// iprintf("%s\n", text);
 	if(strcmp(text,"") != 0)
 	{
 		if( (rbsong->getActive() == true) && (strcmp(text+strlen(text)-3, ".xm") != 0) )
@@ -1567,11 +1567,11 @@ void handleFileChange(File file)
 			u8* testptr = (u8*)malloc(smpsize); // Try to malloc it
 			if(testptr == 0)
 			{
-				iprintf("not enough ram for preview\n");
+				//iprintf("not enough ram for preview\n");
 			}
 			else
 			{
-				iprintf("previewing\n");
+				//iprintf("previewing\n");
 				free(testptr);
 
 				// Load sample
@@ -1624,7 +1624,7 @@ void handleDirChange(const char *newdir)
 
 void handlePreviewSampleFinished(void)
 {
-	iprintf("Sample finished\n");
+	//iprintf("Sample finished\n");
 	delete state->preview_sample;
 	state->preview_sample = 0;
 

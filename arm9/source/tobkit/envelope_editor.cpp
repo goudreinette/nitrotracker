@@ -27,9 +27,12 @@
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
+#include <numbers>
 
 #include "ntxm/ntxmtools.h"
 #include "../tools.h"
+
+using namespace std::numbers;
 
 /* ===================== PUBLIC ===================== */
 
@@ -239,7 +242,7 @@ void EnvelopeEditor::penMove(u8 px, u8 py)
 			double last_len = sqrt((double)(last_dx*last_dx + last_dy*last_dy));
 			double len = sqrt((double)(dx*dx + dy*dy));
 
-			double angle = acos((double)(last_dx*dx + last_dy*dy) / (double)( last_len * len )) * 180.0 / M_PI ;
+			double angle = acos((double)(last_dx*dx + last_dy*dy) / (double)( last_len * len )) * 180.0 / pi ;
 
 			if( (len > DRAW_MIN_POINT_DIST) || (realY == points_max_y) || (realY == 0) )
 			{

@@ -381,6 +381,53 @@ void PatternView::draw(void)
 		drawGradient(solo_col1, solo_col2, SOLO_X(i), SOLO_Y, SOLO_WIDTH, SOLO_HEIGHT);
 		drawString("s", PV_BORDER_WIDTH+i*getCellWidth()+20, 0, 255);
 	}
+
+	// The faded channel that's occluded by the buttons
+	if (getNumVisibleChannels() > 5) {
+		int __i = 0;
+		for (int i = getNumVisibleChannels(); (hscrollpos + i) < song->getChannels() && __i < 2; i++)
+		{
+			__i++;
+			char *numberstr2 = (char*)malloc(3);
+			sprintf(numberstr2,"%-2x",hscrollpos+i);
+			drawString(numberstr2, PV_BORDER_WIDTH+i*getCellWidth()+1, 1, 255, col_sublines);
+			free(numberstr2);
+			// drawFullBox(PV_BORDER_WIDTH+7*getCellWidth()+1, 1, 14, 11, col_notes);
+
+			// mute/solo buttons
+			u8 chn = hscrollpos+i;
+			
+			if( soloChannel() == -1 )
+			{
+				if(mute_channels[chn] == true)
+				{
+					mute_col1 = cb_col1_highlight;
+					mute_col2 = cb_col2_highlight;
+				}
+				else
+				{
+					mute_col1 = cb_col1;
+					mute_col2 = cb_col2;
+				}
+				// drawGradient(mute_col1, mute_col2, MUTE_X(i), MUTE_Y, MUTE_WIDTH, MUTE_HEIGHT);
+				drawString("m", PV_BORDER_WIDTH+i*getCellWidth()+9, 0, 255,col_sublines);
+			}
+			
+			if(solo_channels[chn] == true)
+			{
+				solo_col1 = cb_col1_highlight;
+				solo_col2 = cb_col2_highlight;
+			}
+			else
+			{
+				solo_col1 = cb_col1;
+				solo_col2 = cb_col2;
+			}
+			
+			// drawGradient(solo_col1, solo_col2, SOLO_X(i), SOLO_Y, SOLO_WIDTH, SOLO_HEIGHT);
+			drawString("s", PV_BORDER_WIDTH+i*getCellWidth()+20, 0, 255, col_sublines);
+		}
+	}
 }
 
 // This updates interval variables befoe drawing

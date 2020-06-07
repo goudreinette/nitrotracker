@@ -75,7 +75,7 @@ fat(use_fat)
 			if(!success)
 			{
 				free(confstr);
-				iprintf("Config file invalid\n");
+				//iprintf("Config file invalid\n");
 				return;
 			}
 
@@ -83,7 +83,7 @@ fat(use_fat)
 			if(!success)
 			{
 				free(confstr);
-				iprintf("Config file invalid\n");
+				//iprintf("Config file invalid\n");
 				return;
 			}
 
@@ -91,7 +91,7 @@ fat(use_fat)
 			if(!success)
 			{
 				free(confstr);
-				iprintf("Config file invalid\n");
+				//iprintf("Config file invalid\n");
 				return;
 			}
 			handedness = stringToHandedness(hstring);
@@ -100,7 +100,7 @@ fat(use_fat)
 			if(!success)
 			{
 				free(confstr);
-				iprintf("Config file invalid\n");
+				//iprintf("Config file invalid\n");
 				return;
 			}
 			sample_preview = stringToBool(prevstring);
@@ -213,7 +213,7 @@ void Settings::handednessToString(char *str)
 
 Handedness Settings::stringToHandedness(char *str)
 {
-	if(strcasecmp(str, "Left") == 0)
+	if(strcmp(str, "Left") == 0)
 		return LEFT_HANDED;
 	else
 		return RIGHT_HANDED;
@@ -229,7 +229,7 @@ void Settings::boolToString(bool b, char *str)
 
 bool Settings::stringToBool(char *str)
 {
-	if(strcasecmp(str, "True") == 0)
+	if(strcmp(str, "True") == 0)
 		return true;
 	else
 		return false;

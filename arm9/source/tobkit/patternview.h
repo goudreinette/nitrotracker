@@ -255,7 +255,7 @@ class PatternView: public Widget {
 
 		inline u8 getNumVisibleChannels(void)
 		{
-			u8 cw = (width-PV_BORDER_WIDTH) / getCellWidth() + 1;
+			u8 cw = (width-PV_BORDER_WIDTH) / getCellWidth();
 			if(cw < song->getChannels()) {
 				return cw; // Fill the whole screen! We will fade the two channels below the buttons...
 			} else {
