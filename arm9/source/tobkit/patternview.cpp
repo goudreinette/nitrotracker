@@ -388,6 +388,7 @@ void PatternView::draw(void)
 		for (int i = getNumVisibleChannels(); (hscrollpos + i) < song->getChannels() && __i < 2; i++)
 		{
 			__i++;
+
 			char *numberstr2 = (char*)malloc(3);
 			sprintf(numberstr2,"%-2x",hscrollpos+i);
 			drawString(numberstr2, PV_BORDER_WIDTH+i*getCellWidth()+1, 1, 255, col_sublines);
@@ -426,6 +427,19 @@ void PatternView::draw(void)
 			
 			// drawGradient(solo_col1, solo_col2, SOLO_X(i), SOLO_Y, SOLO_WIDTH, SOLO_HEIGHT);
 			drawString("s", PV_BORDER_WIDTH+i*getCellWidth()+20, 0, 255, col_sublines);
+
+
+			for(u16 j=0;j<getNumVisibleRows();++j)
+			{
+				if((firstrow+j>=0)&&(firstrow+j<song->getPatternLength(song->getPotEntry(state->potpos))))
+				{
+					//drawCell(hscrollpos+i, firstrow+j, (i*getCellWidth()+PV_BORDER_WIDTH+2)/PV_CHAR_WIDTH/*i*14+3*/, j);
+					if(j == highlight_row)
+						drawCell(hscrollpos+i, firstrow+j, i, j, true);
+					else
+						drawCell(hscrollpos+i, firstrow+j, i, j, false);
+				}
+			}
 		}
 	}
 }

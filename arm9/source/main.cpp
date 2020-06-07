@@ -28,7 +28,7 @@
 //------
 
 // #define DEBUG
-// #define DESMUME
+#define DESMUME
 //#define GURU // Show guru meditations
 // #define SPLASH
 //#define WIFIDEBUG
@@ -469,17 +469,17 @@ void sampleChange(Sample *smp)
 	else
 		rbg_sampleloop->setActive(0);
 	/*
-	iprintf("Selected:");
+	printf("Selected:");
 	if(smp->is16bit()) {
-		iprintf("16bit ");
+		printf("16bit ");
 	} else {
-		iprintf("8bit ");
+		printf("8bit ");
 	}
 	if(smp->getLoop() != 0) {
-		iprintf("looping ");
+		printf("looping ");
 	}
-	iprintf("Sample.\n");
-	iprintf("length: %u\n", smp->getNSamples());
+	printf("Sample.\n");
+	printf("length: %u\n", smp->getNSamples());
 	*/
 }
 
@@ -645,7 +645,7 @@ void setSong(Song *newsong)
 bool loadSample(const char *filename_with_path)
 {
 	const char *filename = strrchr(filename_with_path, '/') + 1;
-	//iprintf("file: %s %s\n",filename_with_path, filename);
+	printf("file: %s %s\n",filename_with_path, filename);
 
 	bool load_success;
 	Sample *newsmp = new Sample(filename_with_path, false, &load_success);
@@ -767,7 +767,7 @@ void saveFile(void)
 	strcpy(pathfilename, path);
 	strcpy(pathfilename+strlen(path), filename);
 
-	//iprintf("saving %s ...\n", filename);
+	//printf("saving %s ...\n", filename);
 
 	mb = new MessageBox(&sub_vram, "one moment", 0);
 	gui->registerOverlayWidget(mb, 0, SUB_SCREEN);
@@ -788,7 +788,7 @@ void saveFile(void)
 
 	deleteMessageBox();
 
-	//iprintf("done\n");
+	//printf("done\n");
 
 	free(pathfilename);
 
@@ -895,7 +895,7 @@ void handleTypewriterFilenameOk(void)
 
 	char *text = tw->getText();
 	char *name = 0;
-	// iprintf("%s\n", text);
+	// printf("%s\n", text);
 	if(strcmp(text,"") != 0)
 	{
 		if( (rbsong->getActive() == true) && (strcmp(text+strlen(text)-3, ".xm") != 0) )
@@ -1174,7 +1174,7 @@ void handleDSMWRecv(void)
 	{
 		if(state->dsmi_recv) {
 
-			iprintf("got sth\n");
+			printf("got sth\n");
 
 			u8 type = message & 0xF0;
 			switch(type)
@@ -1184,7 +1184,7 @@ void handleDSMWRecv(void)
 					u8 note = data1;
 					u8 volume = data2 * 2;
 					u8 channel = 255;
-					iprintf("on %d %d\n", inst, note);
+					printf("on %d %d\n", inst, note);
 					CommandPlayInst(inst, note, volume, channel);
 					break;
 				}
@@ -1484,7 +1484,7 @@ void handleNewRow(u16 row)
 
 			if(curr_cell->note == 254) // Note off
 			{
-				//iprintf("off c %u n %u\n", chn, curr_cell->note);
+				//printf("off c %u n %u\n", chn, curr_cell->note);
 				dsmi_write(NOTE_OFF | dsmw_lastchannels[chn], dsmw_lastnotes[chn], 0);
 				dsmw_lastnotes[chn] = curr_cell->note;
 			}
@@ -1492,10 +1492,10 @@ void handleNewRow(u16 row)
 			{
 				// Turn the last note off
 				if(dsmw_lastnotes[chn] < 254) {
-					//iprintf("off c %u n %u\n", chn, curr_cell->note);
+					//printf("off c %u n %u\n", chn, curr_cell->note);
 					dsmi_write(NOTE_OFF | dsmw_lastchannels[chn], dsmw_lastnotes[chn], 0);
 				}
-				//iprintf("on c %u n %u v %u\n", chn, curr_cell->note, curr_cell->volume / 2);
+				//printf("on c %u n %u v %u\n", chn, curr_cell->note, curr_cell->volume / 2);
 				u8 midichannel = curr_cell->instrument % 16;
 				dsmi_write(NOTE_ON | midichannel, curr_cell->note, curr_cell->volume / 2);
 
@@ -1567,11 +1567,11 @@ void handleFileChange(File file)
 			u8* testptr = (u8*)malloc(smpsize); // Try to malloc it
 			if(testptr == 0)
 			{
-				//iprintf("not enough ram for preview\n");
+				//printf("not enough ram for preview\n");
 			}
 			else
 			{
-				//iprintf("previewing\n");
+				//printf("previewing\n");
 				free(testptr);
 
 				// Load sample
@@ -1624,7 +1624,7 @@ void handleDirChange(const char *newdir)
 
 void handlePreviewSampleFinished(void)
 {
-	//iprintf("Sample finished\n");
+	//printf("Sample finished\n");
 	delete state->preview_sample;
 	state->preview_sample = 0;
 
@@ -2353,7 +2353,7 @@ void dsmiConnect(void)
 		showMessage("Sorry, couldn't connect.");
 		state->dsmi_connected = false;
 	} else {
-		iprintf("YAY, connected!\n");
+		printf("YAY, connected!\n");
 		btndsmwtoggleconnect->setCaption("disconnect");
         btndsmwtoggleconnect->pleaseDraw();
         state->dsmi_connected = true;
@@ -3168,7 +3168,7 @@ void handleButtons(u16 buttons, u16 buttonsheld)
 	else if(buttons & KEY_START)
 	{
 #ifdef DEBUG
-		iprintf("\x1b[2J"); //was: consoleClear();
+		printf("\x1b[2J"); //was: consoleClear();
 #else
 		if( (state->playing == false) || (state->pause == true) )
 			startPlay();
@@ -3221,7 +3221,7 @@ void VblankHandler(void)
 	if (keysdown & KEY_TOUCH)
 	{
 		#ifdef DEBUG
-			iprintf("%i, %i \n", touch.rawx, touch.rawy);
+			printf("%i, %i \n", touch.rawx, touch.rawy);
 		#endif
 
 		gui->penDown(x, y);
@@ -3344,7 +3344,7 @@ void fadeIn(void)
 #ifdef DEBUG
 void saveScreenshot(void)
 {
-	iprintf("Saving screenshot\n");
+	printf("Saving screenshot\n");
 	u8 *screenbuf = (u8*)malloc(256*192*3*2);
 
 	u16 col;
@@ -3375,7 +3375,7 @@ void saveScreenshot(void)
 	fclose(fileh);
 
 	free(screenbuf);
-	iprintf("saved\n");
+	printf("saved\n");
 
 	filenr++;
 }
@@ -3393,14 +3393,14 @@ void dumpSample(void)
 	void *data = smp->getData();
 	u32 size = smp->getSize();
 
-	iprintf("saving sample\n");
+	printf("saving sample\n");
 
 	FILE *fileh;
 	fileh = fopen(filename, "w");
 	fwrite(data, size, 1, fileh);
 	fclose(fileh);
 
-	iprintf("saved\n");
+	printf("saved\n");
 }
 #endif
 
@@ -3542,14 +3542,14 @@ int main(void) {
 	// Wireless debugging
 	set_verbosity(VERBOSE_INFO | VERBOSE_ERROR);//OR together VERBOSE_INFO/VERBOSE_ERROR/VERBOSE_TRACE to get the level of detail right. I'd recommend VERBOSE_INFO | VERBOSE_ERROR, or VERBOSE_ERROR at the very least
 
-	iprintf("init wifi\n");
+	printf("init wifi\n");
 	wireless_init(0);	//zero if you've already set up your irqs, non-zero if you haven't yet called irqInit()
-	iprintf("connect via wifi\n");
+	printf("connect via wifi\n");
 	wireless_connect();                     //connect to the AP
 
-	iprintf("debugger connect\n");
+	printf("debugger connect\n");
 	debugger_connect_tcp(192, 168, 1, 33);	//your IP here
-	iprintf("debugger init\n");
+	printf("debugger init\n");
 	debugger_init();
 #endif
 
@@ -3581,7 +3581,7 @@ int main(void) {
 #endif
 
 #ifdef DEBUG
-	iprintf("NitroTracker debug build.\nBuilt %s %s\n<Start> clears messages.\n", __DATE__, __TIME__);
+	printf("NitroTracker debug build.\nBuilt %s %s\n<Start> clears messages.\n", __DATE__, __TIME__);
 #endif
 
 	while(1)
