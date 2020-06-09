@@ -292,8 +292,7 @@ void PatternView::draw(void)
 	
 	// V-Lines
 	for(u16 i=0;i<=getNumVisibleChannels();++i) {
-		u16 col = i > 6 ? col_sublines : linescol;
-		drawLine(PV_BORDER_WIDTH-1+i*getCellWidth(), 0, width-PV_BORDER_WIDTH, 0, col);
+		drawLine(PV_BORDER_WIDTH-1+i*getCellWidth(), 0, width-PV_BORDER_WIDTH, 0, col_sublines);
 	}
 	
 	// Cursor bar
@@ -382,6 +381,7 @@ void PatternView::draw(void)
 		drawString("s", PV_BORDER_WIDTH+i*getCellWidth()+20, 0, 255);
 	}
 
+	// FADED ---- 
 	// The faded channel that's occluded by the buttons
 	if (getNumVisibleChannels() > 5) {
 		int __i = 0;
@@ -391,7 +391,7 @@ void PatternView::draw(void)
 
 			char *numberstr2 = (char*)malloc(3);
 			sprintf(numberstr2,"%-2x",hscrollpos+i);
-			drawString(numberstr2, PV_BORDER_WIDTH+i*getCellWidth()+1, 1, 255, col_sublines);
+			drawString(numberstr2, PV_BORDER_WIDTH+i*getCellWidth()+1, 1, 255, cb_col2);
 			free(numberstr2);
 			// drawFullBox(PV_BORDER_WIDTH+7*getCellWidth()+1, 1, 14, 11, col_notes);
 
@@ -411,7 +411,7 @@ void PatternView::draw(void)
 					mute_col2 = cb_col2;
 				}
 				// drawGradient(mute_col1, mute_col2, MUTE_X(i), MUTE_Y, MUTE_WIDTH, MUTE_HEIGHT);
-				drawString("m", PV_BORDER_WIDTH+i*getCellWidth()+9, 0, 255,col_sublines);
+				drawString("m", PV_BORDER_WIDTH+i*getCellWidth()+9, 0, 255,cb_col2);
 			}
 			
 			if(solo_channels[chn] == true)
@@ -426,7 +426,7 @@ void PatternView::draw(void)
 			}
 			
 			// drawGradient(solo_col1, solo_col2, SOLO_X(i), SOLO_Y, SOLO_WIDTH, SOLO_HEIGHT);
-			drawString("s", PV_BORDER_WIDTH+i*getCellWidth()+20, 0, 255, col_sublines);
+			drawString("s", PV_BORDER_WIDTH+i*getCellWidth()+20, 0, 255, cb_col2);
 
 
 			for(u16 j=0;j<getNumVisibleRows();++j)
@@ -438,6 +438,26 @@ void PatternView::draw(void)
 						drawCell(hscrollpos+i, firstrow+j, i, j, true);
 					else
 						drawCell(hscrollpos+i, firstrow+j, i, j, false);
+				}
+			}
+			
+			// V-lines
+			drawLine(PV_BORDER_WIDTH-1+(i+1)*getCellWidth(), 0, width-PV_BORDER_WIDTH, 0, cb_col2);
+
+			// H-lines
+			s16 realrow;
+			u16 ptnlen = song->getPatternLength(song->getPotEntry(state->potpos));
+			for(u16 i=0; i<=getNumVisibleRows()-1; ++i) {
+				realrow = i-getCursorBarPos()+state->row;
+			
+				if((realrow>=0)&&(realrow<=ptnlen)) {
+					int effectivewidth = getEffectiveWidth();
+
+					if(realrow%PV_CELL_HEIGHT==0) {
+						drawLine(effectivewidth, PV_CELL_HEIGHT*i, getCellWidth() * (__i), 1, col_sublines);
+					} else {
+						drawLine(effectivewidth, PV_CELL_HEIGHT*i, getCellWidth() * (__i), 1, cb_col2);
+					}
 				}
 			}
 		}
