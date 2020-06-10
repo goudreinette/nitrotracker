@@ -43,7 +43,6 @@ extern "C" {
 
 NTXM7 *ntxm7 = 0;
 
-bool lidwasdown = false;
 extern bool ntxm_recording;
 
 int vcount;
@@ -73,17 +72,6 @@ void VcountHandler() {
 
 void VblankHandler(void)
 {
-	if((!lidwasdown)&&(REG_KEYXY & LID_BIT))
-	{
-		PM_SetRegister(0, 0x30);
-		lidwasdown = true;
-	}
-
-	if((lidwasdown)&&(!(REG_KEYXY & LID_BIT)))
-	{
-		PM_SetRegister(0, 0x0D);
-		lidwasdown = false;
-	}
 
 #ifdef WIFI
 	if(ntxm_recording == false)
