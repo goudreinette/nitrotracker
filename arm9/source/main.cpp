@@ -28,7 +28,7 @@
 //------
 
 // #define DEBUG
-#define DESMUME
+// #define DESMUME
 //#define GURU // Show guru meditations
 // #define SPLASH
 //#define WIFIDEBUG
@@ -341,7 +341,7 @@ void handleNoteStroke(u8 note)
 			// Because then we don't use the offset since they have fixed indices
 			
 			// If there is a selection, clear the whole selection!!
-			// And don't step down if it is.
+			// And don't move a step down if it is
 			u16 sel_x1, sel_y1, sel_x2, sel_y2;
 			if(pv->getSelection(&sel_x1, &sel_y1, &sel_x2, &sel_y2) == true)
 			{
@@ -3148,6 +3148,7 @@ void handleButtons(u16 buttons, u16 buttonsheld)
 		}
 	}
 
+	
 	if((buttons & mykey_LEFT)&&(!typewriter_active))
 	{
 		if(state->channel>0) {
