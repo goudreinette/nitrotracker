@@ -28,11 +28,10 @@
 //------
 
 // #define DEBUG
-#define DESMUME
+// #define DESMUME
 //#define GURU // Show guru meditations
 // #define SPLASH
 //#define WIFIDEBUG
-// #define B_IS_H
 //#define WIFI
 #define USE_FAT
 
